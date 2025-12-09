@@ -1,0 +1,6 @@
+Flask
+gunicorn>=21.2.0
+tensorflow==2.12.0
+numpy
+Pillow
+gdown

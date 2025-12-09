@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sistem Klasifikasi Penyakit Buah Mangga</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-green-50 to-green-100 min-h-screen flex flex-col">
+
+  <header class="bg-green-600 text-white shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto flex justify-between items-center p-4">
+      <h1 class="text-xl font-bold">ManggaAI</h1>
+      <ul class="hidden md:flex space-x-6 text-sm">
+        <li><a href="#" class="hover:text-yellow-200">Beranda</a></li>
+        <li><a href="#klasifikasi" class="hover:text-yellow-200">Klasifikasi</a></li>
+        <li><a href="#riwayat" class="hover:text-yellow-200">Riwayat</a></li>
+      </ul>
+      <button class="md:hidden focus:outline-none" id="menu-btn">☰</button>
+    </nav>
+  </header>
+
+  <div id="mobileBackdrop" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:hidden"></div>
+
+  <div id="mobile-menu" class="fixed inset-y-0 right-0 w-64 bg-green-700 text-white shadow-xl 
+                             transform transition-transform duration-300 translate-x-full 
+                             md:hidden z-50 p-4"
+     aria-hidden="true">
+    
+    <div class="flex justify-end mb-6">
+        <button class="text-white text-2xl" id="mobile-close-btn">
+            &times; 
+        </button>
+    </div>
+
+    <ul class="flex flex-col items-start space-y-4 text-sm">
+      <li><a href="#" class="hover:text-yellow-200" onclick="closeMobileMenu()">Beranda</a></li>
+      <li><a href="#klasifikasi" class="hover:text-yellow-200" onclick="closeMobileMenu()">Klasifikasi</a></li>
+      <li><a href="#riwayat" class="hover:text-yellow-200" onclick="closeMobileMenu()">Riwayat</a></li>
+    </ul>
+  </div>
+
+  <section class="flex flex-col justify-center items-center text-center py-16 px-4 bg-white shadow-md">
+    <h2 class="text-3xl font-semibold text-green-700 mb-4">Sistem Klasifikasi Penyakit Buah Mangga</h2>
+    <p class="text-gray-600 max-w-xl mb-6">
+      Deteksi otomatis penyakit pada buah mangga menggunakan model deep learning VGG16.
+    </p>
+    <a href="#klasifikasi" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+      Mulai Klasifikasi
+    </a>
+  </section>
+
+  <main id="klasifikasi" class="container mx-auto py-12 px-4">
+    <div class="bg-white rounded-2xl shadow-md p-6 md:p-10 flex flex-col items-center">
+      <h3 class="text-2xl font-semibold text-green-700 mb-6">Upload Gambar Mangga</h3>
+
+      <div class="w-full md:w-2/3">
+        <div id="dropZone" class="border-2 border-dashed border-green-400 rounded-lg h-48 flex flex-col justify-center items-center bg-green-50 hover:bg-green-100 transition">
+          <p class="text-gray-600">Seret atau klik untuk mengunggah gambar</p>
+          <input type="file" accept="image/*" class="hidden" id="fileInput" />
+          <div class="mt-3 flex gap-3">
+            <button id="uploadBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Pilih Gambar</button>
+            <button id="openCameraBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Gunakan Kamera</button>
+          </div>
+        </div>
+
+        <div id="cameraContainer" class="mt-4 hidden flex flex-col items-center">
+          <video id="cameraStream" autoplay playsinline class="w-64 h-48 bg-black rounded-md"></video>
+          <div class="mt-3 flex gap-3">
+            <button id="captureBtn" class="bg-yellow-500 text-white px-4 py-2 rounded-lg hover:bg-yellow-600">Ambil Foto</button>
+            <button id="stopCameraBtn" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">Batal</button>
+          </div>
+        </div>
+
+        <canvas id="captureCanvas" class="hidden"></canvas>
+      </div>
+
+      <div id="previewContainer" class="mt-6 hidden">
+        <img id="previewImage" alt="Preview" class="w-64 h-64 object-cover rounded-lg shadow-md mx-auto" />
+      </div>
+
+      <button id="classifyBtn" class="mt-6 bg-yellow-500 text-white px-6 py-2 rounded-lg hover:bg-yellow-600">
+        Klasifikasikan
+      </button>
+
+      <div id="resultContainer" class="mt-6 hidden text-center">
+        <h4 class="text-lg font-medium text-gray-700">Hasil Klasifikasi:</h4>
+        <p id="resultLabel" class="text-2xl font-semibold text-green-700 mt-2">-</p>
+        <p id="confidence" class="text-gray-500 text-sm mt-1">Akurasi: -</p>
+      </div>
+
+      <button id="resetBtn" class="mt-6 text-sm text-gray-600 hover:text-green-600 underline">
+        Reset Halaman
+      </button>
+    </div>
+  </main>
+
+  <section id="riwayat" class="container mx-auto py-10 px-4">
+    <div class="bg-white shadow-md rounded-xl p-6">
+      <h3 class="text-2xl font-semibold text-green-700 mb-4 text-center">Riwayat Hasil Klasifikasi (Sementara)</h3>
+      <p class="text-gray-500 text-center mb-4">Data akan hilang setelah halaman direfresh.</p>
+      <div id="historyList" class="space-y-3 text-sm text-gray-700">
+        <p class="text-center text-gray-400 italic">Belum ada hasil klasifikasi.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-green-700 text-white text-center py-4 mt-auto">
+    <p class="text-sm">© 2025 Sistem Klasifikasi Mangga - Dibuat untuk penelitian akademik</p>
+  </footer>
+
+  <!-- 🔹 Script Interaksi -->
+  <script src="../static/script.js"></script>
+
+</body>
+</html>
