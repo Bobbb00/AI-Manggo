@@ -184,40 +184,40 @@
 
           historyData.forEach((item, index) => {
             const el = document.createElement("div");
-            el.className = "border border-gray-200 rounded-lg p-3 mb-3";
+            el.className = "border border-gray-200 rounded-lg p-2 md:p-3 mb-3";
 
             const header = document.createElement('div');
-            header.className = 'flex items-center justify-between gap-3';
+            header.className = 'flex flex-col xs:flex-row md:flex-row items-start md:items-center justify-between gap-2 md:gap-3';
 
             const left = document.createElement('div');
-            left.className = 'flex items-center gap-3';
+            left.className = 'flex items-center gap-2 md:gap-3';
 
             if (item.imageSrc) {
               const thumb = document.createElement('img');
               thumb.src = item.imageSrc;
-              thumb.className = 'w-12 h-12 object-cover rounded-md border';
+              thumb.className = 'w-10 h-10 md:w-12 md:h-12 object-cover rounded-md border';
               thumb.alt = 'thumb';
               left.appendChild(thumb);
             }
 
             const meta = document.createElement('div');
             meta.className = 'flex flex-col';
-            meta.innerHTML = `<span class="font-medium">${index + 1}. ${item.label}</span><span class="text-xs text-gray-500">${item.waktu}</span>`;
+            meta.innerHTML = `<span class="font-medium text-sm md:text-base">${index + 1}. ${item.label}</span><span class="text-xs text-gray-500">${item.waktu}</span>`;
             left.appendChild(meta);
 
             const actions = document.createElement('div');
-            actions.className = 'flex items-center gap-2';
+            actions.className = 'flex flex-col md:flex-row items-stretch md:items-center gap-1 md:gap-2 mt-2 md:mt-0';
 
             const acc = document.createElement('div');
-            acc.className = 'text-sm text-green-700 font-semibold mr-2';
+            acc.className = 'text-xs md:text-sm text-green-700 font-semibold md:mr-2 mb-1 md:mb-0';
             acc.textContent = item.akurasi;
 
             const detailBtn = document.createElement('button');
-            detailBtn.className = 'text-sm bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700';
+            detailBtn.className = 'text-xs md:text-sm bg-blue-600 text-white px-2 py-1 md:px-3 md:py-1 rounded hover:bg-blue-700 mb-1 md:mb-0';
             detailBtn.textContent = 'Lihat Detail';
 
             const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'text-sm bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600';
+            deleteBtn.className = 'text-xs md:text-sm bg-red-500 text-white px-2 py-1 md:px-3 md:py-1 rounded hover:bg-red-600';
             deleteBtn.textContent = 'Hapus';
 
             actions.appendChild(acc);
@@ -231,19 +231,19 @@
 
             // Detail panel (hidden by default)
             const details = document.createElement('div');
-            details.className = 'mt-3 hidden';
+            details.className = 'mt-2 md:mt-3 hidden';
             details.innerHTML = `
-              <div class="flex flex-col md:flex-row items-start md:items-center gap-4">
-                <div class="flex-shrink-0">
-                  ${item.imageSrc ? `<img src="${item.imageSrc}" class="w-40 h-40 object-cover rounded-md border" alt="img">` : '<div class="w-40 h-40 bg-gray-100 flex items-center justify-center text-sm text-gray-500 rounded-md">No Image</div>'}
+              <div class="flex flex-col md:flex-row items-start md:items-center gap-2 md:gap-4">
+                <div class="flex-shrink-0 mb-2 md:mb-0">
+                  ${item.imageSrc ? `<img src="${item.imageSrc}" class="w-28 h-28 md:w-40 md:h-40 object-cover rounded-md border" alt="img">` : '<div class="w-28 h-28 md:w-40 md:h-40 bg-gray-100 flex items-center justify-center text-xs md:text-sm text-gray-500 rounded-md">No Image</div>'}
                 </div>
                 <div class="flex-1">
-                  <p class="mb-2"><strong>Label:</strong> ${item.label}</p>
-                  <p class="mb-2"><strong>Akurasi:</strong> ${item.akurasi}</p>
-                  <p class="mb-2"><strong>Waktu:</strong> ${item.waktu}</p>
+                  <p class="mb-1 md:mb-2 text-sm md:text-base"><strong>Label:</strong> ${item.label}</p>
+                  <p class="mb-1 md:mb-2 text-sm md:text-base"><strong>Akurasi:</strong> ${item.akurasi}</p>
+                  <p class="mb-1 md:mb-2 text-sm md:text-base"><strong>Waktu:</strong> ${item.waktu}</p>
                   <div>
                     <strong>Prediksi (top):</strong>
-                    <ul class="list-disc list-inside text-sm text-gray-700 mt-1">
+                    <ul class="list-disc list-inside text-xs md:text-sm text-gray-700 mt-1">
                       ${item.predictions ? item.predictions.map(p => `<li>${p.label}: ${(p.p*100).toFixed(2)}%</li>`).join('') : '<li>-</li>'}
                     </ul>
                   </div>

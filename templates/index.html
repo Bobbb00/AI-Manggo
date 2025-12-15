@@ -55,12 +55,12 @@
       <h3 class="text-2xl font-semibold text-green-700 mb-6">Upload Gambar Mangga</h3>
 
       <div class="w-full md:w-2/3">
-        <div id="dropZone" class="border-2 border-dashed border-green-400 rounded-lg h-48 flex flex-col justify-center items-center bg-green-50 hover:bg-green-100 transition">
-          <p class="text-gray-600">Seret atau klik untuk mengunggah gambar</p>
+        <div id="dropZone" class="border-2 border-dashed border-green-400 rounded-lg h-40 md:h-48 flex flex-col justify-center items-center bg-green-50 hover:bg-green-100 transition px-2 py-2 md:px-0 md:py-0">
+          <p class="text-gray-600 text-sm md:text-base text-center leading-snug">Seret atau klik untuk<br class="block md:hidden"> mengunggah gambar</p>
           <input type="file" accept="image/*" class="hidden" id="fileInput" />
-          <div class="mt-3 flex gap-3">
-            <button id="uploadBtn" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">Pilih Gambar</button>
-            <button id="openCameraBtn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Gunakan Kamera</button>
+          <div class="mt-2 md:mt-3 flex gap-2 md:gap-3 w-full justify-center">
+            <button id="uploadBtn" class="bg-green-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg text-sm md:text-base hover:bg-green-700 w-1/2 md:w-auto">Pilih Gambar</button>
+            <button id="openCameraBtn" class="bg-blue-600 text-white px-3 py-2 md:px-4 md:py-2 rounded-lg text-sm md:text-base hover:bg-blue-700 w-1/2 md:w-auto">Gunakan Kamera</button>
           </div>
         </div>
 
