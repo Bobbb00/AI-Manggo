@@ -26,7 +26,7 @@ if not os.path.exists(TFLITE_MODEL_PATH):
     
 IMAGE_SIZE = (224, 224)
 
-CLASS_NAMES = ['Alternaria', 'Anthracnose', 'Black Mould Rot', 'Bukan Mangga', 'Healthy', 'Stem And rot' ]
+CLASS_NAMES = ['Antraknosa', 'Alternaria', 'Jamur hitam', 'Bukan Mangga', 'Sehat', 'Busuk pangkal batang' ]
 # Threshold confidence minimal untuk deteksi "bukan buah mangga"
 CONFIDENCE_THRESHOLD = 0.5  # 50%
 
